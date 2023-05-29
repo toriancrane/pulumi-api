@@ -15,11 +15,6 @@ The Automation API allows developers to define infrastructure programmatically, 
 - **Advanced Automation**: It can also be used for advanced automation use-cases, including creating custom deployment workflows, integrating with CI/CD pipelines, automated testing and more.
 - **Language Choice**: Since Pulumi supports multiple languages (like Python, JavaScript/TypeScript, Go, etc.), you can choose the one that best suits your project needs or the one your team is most comfortable with.
 
-## Problems it Solves:
-- **Difficulty with DSLs**: Domain-specific languages can be difficult to learn and lack the power and expressiveness of full-fledged programming languages. The Automation API addresses this problem by allowing infrastructure to be defined in general-purpose programming languages.
-- **Infrastructure Complexity**: Managing complex infrastructure requirements can be challenging with traditional IaC tools. By enabling custom abstractions, the Automation API allows developers to encapsulate complexity in ways that are easier to manage.
-- **Integration and Customization**: Integration with existing systems and creation of custom deployment workflows can be complex with traditional IaC tools. The Automation API solves this by allowing developers to programmatically manage Pulumi stacks.
-
 ## Using a Pulumi Program versus a Pulumi Automation API Program:
 
 A Pulumi program is a more traditional way of defining and managing infrastructure as code using Pulumi's libraries. It is typically written in a general-purpose programming language and executed using Pulumi's CLI.
