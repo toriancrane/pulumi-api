@@ -16,11 +16,31 @@ The Automation API allows developers to define infrastructure programmatically, 
 - Infrastructure Complexity: Managing complex infrastructure requirements can be challenging with traditional IaC tools. By enabling custom abstractions, the Automation API allows developers to encapsulate complexity in ways that are easier to manage.
 - Integration and Customization: Integration with existing systems and creation of custom deployment workflows can be complex with traditional IaC tools. The Automation API solves this by allowing developers to programmatically manage Pulumi stacks.
 
-## Using Pulumi Automation API:
+## Using a Pulumi Program versus a Pulumi Automation API Program:
 
-Using the Pulumi Automation API involves creating an Automation Stack object, and defining infrastructure using Pulumi's regular programming model. Here is an example using Python:
+A Pulumi program is a more traditional way of defining and managing infrastructure as code using Pulumi's libraries. It is typically written in a general-purpose programming language and executed using Pulumi's CLI.
+
+On the other hand, a Pulumi Automation API program also allows defining and managing infrastructure, but it can orchestrate the entire lifecycle of infrastructure within your application, bypassing the need for a separate CLI.
+
+Below are examples to illustrate the difference.
+
+### Pulumi Program (Python)
 
 ```
-Code Example
+import pulumi
+import pulumi_aws as aws
+
+queue = aws.sqs.Queue("queue",
+    content_based_deduplication=True,
+    fifo_queue=True)
+
+```
+
+To run this program, you'd use the Pulumi CLI, first running `pulumi up` to create the stack and deploy the resources, then `pulumi destroy` to tear down the resources when you're done.
+
+### Pulumi Automation API Program (Python)
+
+```
+Code Example 2
 TBD
 ```
