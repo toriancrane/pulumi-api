@@ -47,11 +47,71 @@ To run this program, you'd use the Pulumi CLI, first running `pulumi up` to crea
 ### Pulumi Automation API Program (Python)
 
 ```
-Code Example 2
-TBD
+import sys
+import json
+import pulumi
+from pulumi import automation as auto
+import pulumi_aws as aws
+
+
+# This is the pulumi program in "inline function" form
+def pulumi_program():
+    # Create a FIFO SQS queue
+
+    queue = aws.sqs.Queue("queue",
+        content_based_deduplication=True,
+        fifo_queue=True)
+    
+
+# To destroy our program, we can run python main.py destroy
+destroy = False
+args = sys.argv[1:]
+if len(args) > 0:
+    if args[0] == "destroy":
+        destroy = True
+
+project_name = "inline_sqs_project"
+stack_name = "dev"
+
+# create or select a stack matching the specified name and project.
+# this will set up a workspace with everything necessary to run our inline program (pulumi_program)
+stack = auto.create_or_select_stack(stack_name=stack_name,
+                                    project_name=project_name,
+                                    program=pulumi_program)
+
+print("successfully initialized stack")
+
+# for inline programs, we must manage plugins ourselves
+print("installing plugins...")
+stack.workspace.install_plugin("aws", "v4.0.0")
+print("plugins installed")
+
+# set stack configuration specifying the AWS region to deploy
+print("setting up config")
+stack.set_config("aws:region", auto.ConfigValue(value="eu-central-1"))
+print("config set")
+
+print("refreshing stack...")
+stack.refresh(on_output=print)
+print("refresh complete")
+
+if destroy:
+    print("destroying stack...")
+    stack.destroy(on_output=print)
+    print("stack destroy complete")
+    sys.exit()
+
+print("updating stack...")
+up_res = stack.up(on_output=print)
+print(f"update summary: \n{json.dumps(up_res.summary.resource_changes, indent=4)}")
 ```
 
-In this example, we're doing the same thing as in the first example, but we're doing it all within our Python program, without needing to use the CLI. We define the infrastructure in a function (which could be dynamic, use inputs/outputs, manage multiple stacks, catch errors and more), create a Pulumi project and stack, set up the config, and deploy the stack, all programmatically. This opens up a lot more flexibility and control over the infrastructure lifecycle.
+In this example, we're doing the same thing as in the first example, but we're doing it all within our Python program, without needing to use the CLI. We define the infrastructure in a function, create a Pulumi project and stack, set up the config, and deploy the stack, all programmatically. Defining our infrastructure as a function opens up a lot more flexibility and control over the infrastructure lifecycle, including but not limited to things like:
+- dynamically creating resources
+- using inputs/outputs
+- managing multiple stacks
+- catching errors
+- cleaning up resources
 
 ## Conclusion
 
