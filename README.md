@@ -17,11 +17,11 @@ The Automation API allows developers to define infrastructure programmatically, 
 
 ## Using a Pulumi Program versus a Pulumi Automation API Program:
 
-A Pulumi program is a more traditional way of defining and managing infrastructure as code using Pulumi's libraries. It is typically written in a general-purpose programming language and executed using Pulumi's CLI.
+A Pulumi program is a more traditional way of defining and managing infrastructure as code using Pulumi's libraries. It is typically written in a general-purpose programming language and executed via Pulumi's CLI using commands such as `pulumi up`, `pulumi preview`, `pulumi destroy`, `pulumi stack init` etc.
 
-On the other hand, a Pulumi Automation API program also allows defining and managing infrastructure, but it can orchestrate the entire lifecycle of infrastructure within your application, bypassing the need for a separate CLI.
+A Pulumi Automation API program also allows defining and managing infrastructure, but it can orchestrate the entire lifecycle of infrastructure directly within embedded environments (such as web servers), eliminating the need to interact with a CLI.
 
-While Pulumi's command-line interface (CLI) is powerful and capable, the Automation API offers greater flexibility and control. The CLI is excellent for manually deploying infrastructure and working with individual stacks, but for complex deployments, customized workflows, or integration with other software, the Automation API shines.
+Simply put, the CLI is excellent for manually deploying infrastructure and working with individual stacks, but for complex deployments, customized workflows, or integration with other software, the Automation API shines as it offers greater flexibility and control.
 
 Let's explore a practical Python example for both options to illustrate the difference.
 
@@ -101,7 +101,7 @@ up_res = stack.up(on_output=print)
 print(f"update summary: \n{json.dumps(up_res.summary.resource_changes, indent=4)}")
 ```
 
-In this example, we're doing the same thing as in the first example, but we're doing it all within our Python program, without needing to use the CLI. We define the infrastructure in a function, create a Pulumi project and stack, set up the config, and deploy the stack, all programmatically. Defining our infrastructure as a function opens up a lot more flexibility and control over the infrastructure lifecycle, including but not limited to things like:
+In this example, we're doing the same thing as in the first example, but we're doing it all within our Python program, without needing to use the Pulumi CLI. We define the infrastructure in a function, create a Pulumi project and stack, set up the config, and deploy the stack, all programmatically. Defining our infrastructure as a function opens up a lot more flexibility and control over the infrastructure lifecycle, including but not limited to things like:
 - dynamically creating resources
 - using inputs/outputs
 - managing multiple stacks
