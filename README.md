@@ -19,9 +19,9 @@ The Automation API allows developers to define infrastructure programmatically, 
 
 A Pulumi program is a more traditional way of defining and managing infrastructure as code using Pulumi's libraries. It is typically written in a general-purpose programming language and executed via Pulumi's CLI using commands such as `pulumi up`, `pulumi preview`, `pulumi destroy`, `pulumi stack init` etc.
 
-A Pulumi Automation API program also allows defining and managing infrastructure, but it can orchestrate the entire lifecycle of infrastructure directly within embedded environments (such as web servers), eliminating the need to interact with a CLI.
+A Pulumi Automation API program also allows defining and managing infrastructure, but where it differs is that it can orchestrate the entire lifecycle of infrastructure directly within embedded environments (such as web servers), eliminating the need to interact with a CLI.
 
-Simply put, the CLI is excellent for manually deploying infrastructure and working with individual stacks, but for complex deployments, customized workflows, or integration with other software, the Automation API shines as it offers greater flexibility and control.
+Simply put, the CLI is excellent for manually deploying infrastructure and working with individual stacks, but for complex deployments, customized workflows, or integration with other software, the Automation API shines for the greater flexibility and control that it offers.
 
 Let's explore a practical Python example for both options to illustrate the difference.
 
@@ -37,7 +37,7 @@ queue = aws.sqs.Queue("queue",
 
 ```
 
-To run this program, you'd use the Pulumi CLI, first running `pulumi up` to create the stack and deploy the resources, then `pulumi destroy` to tear down the resources when you're done.
+This program would be accompanied by additional project files such as the `Pulumi.yaml` file which is responsible for defining [the configuration of the project](https://www.pulumi.com/docs/concepts/projects/). To run this program, you'd use the Pulumi CLI, first running `pulumi up` to create the stack and deploy the resources, then `pulumi destroy` to tear down the resources when you're done.
 
 ### Pulumi Automation API Program (Python)
 
@@ -110,4 +110,4 @@ In this example, we're doing the same thing as in the first example, but we're d
 
 ## Conclusion
 
-In an age where software and infrastructure are becoming increasingly intertwined, tools that bridge these two worlds offer immense value. Pulumi's Automation API is one such tool, offering flexibility, power, and a high degree of customization. Whether you're managing complex infrastructure requirements, building custom deployment workflows, or just tired of wrestling with DSLs, the Automation API could be the game-changer you need.
+In an age where software and infrastructure are becoming increasingly intertwined, tools that bridge the gap between these two worlds offer immense value. Pulumi's Automation API is one such tool, offering flexibility, power, and a high degree of customization. Whether you're managing complex infrastructure requirements, building custom deployment workflows, or just tired of wrestling with DSLs, the Automation API could be the game-changer you need.
